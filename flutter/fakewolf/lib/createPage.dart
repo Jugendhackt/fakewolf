@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'GLOBALS.dart';
 
 
 class CreatePage extends StatefulWidget {
@@ -21,6 +22,16 @@ class CreatePage extends StatefulWidget {
 }
 
 class _CreatePageState extends State<CreatePage> {
+  CreatePage() {
+    print("TTEEEEEEEEEEEEEEEEEST");
+  }
+  int value = 0;
+
+  _addItem() {
+    setState(() {
+      value = value + 1;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,18 +70,39 @@ class _CreatePageState extends State<CreatePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
                Text(
-                 "Your Room:",
+                 "Your Room-Code is:",
                  style: new TextStyle(
                    fontSize: 23.0,
                    color: Colors.black,
                    fontStyle: FontStyle.normal
                  ),
                ),
+              Container(
+                margin: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.all(3.0),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blueAccent)
+              ),
+              child: SelectableText(
+                  roomCode,
+                  style: new TextStyle(
+                    fontSize: 27.0,
+                    color: Colors.black,
+                    fontStyle: FontStyle.normal
+                ),
+              ),
+            ),
+            Icon(Icons.people),
+            ListView.builder(
+              itemCount: this.value,
+              itemBuilder: (context, index) => this._buildRow(index)),
           ],
         ),
       ),
-
       // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+  _buildRow(int index) {
+    return Text("Item " + index.toString());
   }
 }

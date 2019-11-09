@@ -6,7 +6,10 @@ switch (@parse_url($_SERVER['REQUEST_URI'])['path']) {
         require 'createRoom.php';
         break;
     case '/sendMessage':
-        require 'createRoom.php';
+        require 'sendMessage.php';
+        break;
+    case '/getMessages':
+        require 'getMessages.php';
         break;
     default:
         if(file_exists($file)){

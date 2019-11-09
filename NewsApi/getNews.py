@@ -17,7 +17,7 @@ pageSize = config['DEFAULT']['pageSize']
 print(apiKey)
   
 # defining a params dict for the parameters to be sent to the API 
-data = {'language':language, 'apiKey':apiKey, 'pageSize':pageSize, 'sortBy':"popularity", "sources":"bild"} 
+data = {'language':language, 'apiKey':apiKey, 'pageSize':pageSize, 'sortBy':"popularity", "sources":"focus"} 
 
  
 # sending get request and saving the response as response object 
@@ -36,6 +36,6 @@ f.close
 # of the first matching location 
 
 # printing the output 
-print(r)
+print(r.text)
 
 print(r.json()["totalResults"])

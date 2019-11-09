@@ -8,6 +8,9 @@ switch (@parse_url($_SERVER['REQUEST_URI'])['path']) {
     case '/sendMessage':
         require 'sendMessage.php';
         break;
+    case '/getMessages':
+        require 'getMessages.php';
+        break;
     default:
         if(file_exists($file)){
             require $file;

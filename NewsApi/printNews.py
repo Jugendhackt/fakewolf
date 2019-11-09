@@ -3,9 +3,10 @@ import msvcrt
 
 filename = input("please enter the json filename ")
 
-r = open(filename)
+r = open(filename,"r",encoding="utf-8")
+data = r.read()
 
-data = json.load(r)
+data = json.loads(data)
 
 out = []
 

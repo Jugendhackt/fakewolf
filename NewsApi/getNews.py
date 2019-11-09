@@ -3,24 +3,32 @@ import requests
 import json
 import configparser
 
+
+config = configparser.ConfigParser()
+config.read('config.ini')
+
 # api-endpoint 
-URL = "https://newsapi.org/v2/top-headlines"
+URL = config['DEFAULT']['url']
 
 # location given here 
-country = input("country:")
-config = configparser.ConfigParser()
-apiKey = config['apiKey'] 
+language = input("language:")
+apiKey = config['DEFAULT']['apiKey']
+pageSize = config['DEFAULT']['pageSize']
+print(apiKey)
   
 # defining a params dict for the parameters to be sent to the API 
-data = {'country':country, 'apiKey':apiKey} 
-  
+data = {'language':language, 'apiKey':apiKey, 'pageSize':pageSize, 'sortBy':"popularity", "sources":"bild"} 
+
+ 
 # sending get request and saving the response as response object 
-r = requests.get(URL, params = data) 
+r = requests.get(URL, params = data)
+ 
   
 # extracting data in json format 
-data = r.json() 
-  
-f= open("news.txt","w+")
+#r = r.content.decode("utf-8")
+
+filename = input("please enter the output file")
+f= open(filename,"w+",encoding="utf-8")
 f.write(r.text)
 f.close
   
@@ -28,4 +36,6 @@ f.close
 # of the first matching location 
 
 # printing the output 
-print(r.text)
+print(r)
+
+print(r.json()["totalResults"])

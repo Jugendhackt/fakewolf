@@ -1,3 +1,5 @@
+
+
 [DEFAULT]
-apiKey=""
-url="https://newsapi.org/v2/everything"
+apiKey=
+url=https://newsapi.org/v2/top-headlines

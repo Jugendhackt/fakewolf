@@ -24,13 +24,13 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Arial',
       ),
-      home: MyHomePage(title: 'FakeWolf'),
+      home: StartPage(title: 'FakeWolf'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class StartPage extends StatefulWidget {
+  StartPage({Key key, this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -44,19 +44,14 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _StartPageState createState() => _StartPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _StartPageState extends State<StartPage> {
 
   void _createRoom() async {
-
-    Future<http.Response> test = http.get('https://fakewolf.appspot.com/getMessages?roomID=1');
-    test.then((result) {
-      print(result.toString());
-    });
-
     setState(() {
+
     });
   }
 

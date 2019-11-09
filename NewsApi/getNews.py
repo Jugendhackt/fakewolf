@@ -28,10 +28,8 @@ r = requests.get(URL, params = data)
 #r = r.content.decode("utf-8")
 
 filename = input("please enter the output file")
-f= open(filename,"w+")
-r= r.text
-r.json.dumps.content.replace(u"\u2009"," ")
-f.write(r)
+f= open(filename,"w+",encoding="utf-8")
+f.write(r.text)
 f.close
   
 # extracting latitude, longitude and formatted address  
@@ -40,4 +38,4 @@ f.close
 # printing the output 
 print(r)
 
-print(r.json["totalResults"])
+print(r.json()["totalResults"])

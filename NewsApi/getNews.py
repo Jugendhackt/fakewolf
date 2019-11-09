@@ -1,13 +1,15 @@
 # importing the requests library 
 import requests 
 import json
-  
+import configparser
+
 # api-endpoint 
 URL = "https://newsapi.org/v2/top-headlines"
 
 # location given here 
-country = "de"
-apiKey =  "4a6694e1f008452db8a44bc3f70b5606"
+country = input("country:")
+config = configparser.ConfigParser()
+apiKey = config['apiKey'] 
   
 # defining a params dict for the parameters to be sent to the API 
 data = {'country':country, 'apiKey':apiKey} 

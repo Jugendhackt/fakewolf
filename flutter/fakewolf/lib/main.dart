@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
 //fakewolf.appspot.com
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -19,6 +22,7 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.blue,
+        fontFamily: 'Arial',
       ),
       home: MyHomePage(title: 'FakeWolf'),
     );
@@ -45,9 +49,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  void _createRoom() {
-    setState(() {
+  void _createRoom() async {
 
+    Future<http.Response> test = http.get('https://fakewolf.appspot.com/getMessages?roomID=1');
+    test.then((result) {
+      print(result.toString());
+    });
+
+    setState(() {
     });
   }
 

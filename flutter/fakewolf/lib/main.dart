@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-
-//fakewolf.appspot.com
+import 'GLOBALS.dart';
+import 'createPage.dart';
+import 'joinPage.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -51,13 +52,17 @@ class _StartPageState extends State<StartPage> {
 
   void _createRoom() async {
     setState(() {
-
+      Navigator.of(context).push(MaterialPageRoute<Null>(builder: (BuildContext context) {
+        return new CreatePage();
+      }));
     });
   }
 
   void _joinRoom() {
     setState(() {
-
+      Navigator.of(context).push(MaterialPageRoute<Null>(builder: (BuildContext context) {
+        return new JoinPage();
+      }));
     });
   }
 
@@ -97,6 +102,7 @@ class _StartPageState extends State<StartPage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Expanded(child: Container()),
             RaisedButton(
               child: Text("Create Room", style: TextStyle(color: Colors.white)),
               color: Colors.blue,
@@ -107,6 +113,12 @@ class _StartPageState extends State<StartPage> {
               color: Colors.blue,
               onPressed: () => _joinRoom(),
             ),
+            Expanded(child: Container()),
+            Text("Your name is: $playerName",
+              style: new TextStyle(
+                fontSize: 17.0,
+                color: Colors.black,
+              ),),
           ],
         ),
       ),

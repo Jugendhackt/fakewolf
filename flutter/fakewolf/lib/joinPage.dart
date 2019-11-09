@@ -1,37 +1,9 @@
 import 'package:flutter/material.dart';
-import 'GLOBALS.dart';
-import 'createPage.dart';
-import 'joinPage.dart';
+import 'package:flutter/painting.dart';
 
-void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'FakeWolf',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-        fontFamily: 'Arial',
-      ),
-      home: StartPage(title: 'FakeWolf'),
-    );
-  }
-}
-
-class StartPage extends StatefulWidget {
-  StartPage({Key key, this.title}) : super(key: key);
+class JoinPage extends StatefulWidget {
+  JoinPage({Key key, this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -45,26 +17,10 @@ class StartPage extends StatefulWidget {
   final String title;
 
   @override
-  _StartPageState createState() => _StartPageState();
+  _JoinPageState createState() => _JoinPageState();
 }
 
-class _StartPageState extends State<StartPage> {
-
-  void _createRoom() async {
-    setState(() {
-      Navigator.of(context).push(MaterialPageRoute<Null>(builder: (BuildContext context) {
-        return new CreatePage();
-      }));
-    });
-  }
-
-  void _joinRoom() {
-    setState(() {
-      Navigator.of(context).push(MaterialPageRoute<Null>(builder: (BuildContext context) {
-        return new JoinPage();
-      }));
-    });
-  }
+class _JoinPageState extends State<JoinPage> {
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +35,7 @@ class _StartPageState extends State<StartPage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text("Join Room"),
       ),
       body: Center(
 
@@ -102,23 +58,14 @@ class _StartPageState extends State<StartPage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Expanded(child: Container()),
-            RaisedButton(
-              child: Text("Create Room", style: TextStyle(color: Colors.white)),
-              color: Colors.blue,
-              onPressed: () => _createRoom(),
-            ),
-            RaisedButton(
-              child: Text("Join Room", style: TextStyle(color: Colors.white)),
-              color: Colors.blue,
-              onPressed: () => _joinRoom(),
-            ),
-            Expanded(child: Container()),
-            Text("Your name is: $playerName",
+            Text(
+              "Please enter a Room-Code:",
               style: new TextStyle(
-                fontSize: 17.0,
-                color: Colors.black,
-              ),),
+                  fontSize: 23.0,
+                  color: Colors.black,
+                  fontStyle: FontStyle.normal
+              ),
+            ),
           ],
         ),
       ),

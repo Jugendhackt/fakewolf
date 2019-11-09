@@ -2,12 +2,12 @@ import asyncio
 import json
 import logging
 import websockets
-import room.py
+import room
 
-
-room.Room()
 
 STATE = {"value": 0}
+
+ROOMS = []
 
 USERS = set()
 
@@ -34,6 +34,7 @@ async def notify_users():
 
 async def register(websocket):
     USERS.add(websocket)
+
     await notify_users()
 
 
@@ -49,11 +50,15 @@ async def counter(websocket, path):
         await websocket.send(state_event())
         async for message in websocket:
             data = json.loads(message)
-            if data["action"] == "minus":
-                STATE["value"] -= 1
+            if data["action"] == "createRoom":
+                raum = room.Room()
+                raum.setId(data["roomID"])
+                ROOMS.append(raum)
                 await notify_state()
-            elif data["action"] == "plus":
-                STATE["value"] += 1
+            elif data["action"] == "getRooms":
+                for raum in ROOMS:
+                    print("uff")
+                    print(raum.getId)
                 await notify_state()
             else:
                 logging.error("unsupported event: {}", data)

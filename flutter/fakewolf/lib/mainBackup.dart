@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'GLOBALS.dart';
 import 'createPage.dart';
 import 'joinPage.dart';
+import 'websockets.dart';
+import 'gamecommunication.dart';
 
 void main() => runApp(MyApp());
 
@@ -50,8 +52,17 @@ class StartPage extends StatefulWidget {
 
 class _StartPageState extends State<StartPage> {
 
+
+  initState() {
+    super.initState();
+    game.addListener((message){
+      print("RECEIVED: " + message);
+    });
+  }
+
   void _createRoom() async {
     setState(() {
+      game.send("createRoom", playerName);
       Navigator.of(context).push(MaterialPageRoute<Null>(builder: (BuildContext context) {
         return new CreatePage();
       }));

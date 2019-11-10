@@ -105,7 +105,7 @@ class GameCommunication {
 				break;
 
 			case 'phaseUpdate':
-				navigatorKey.currentState.push(MaterialPageRoute(builder: (BuildContext) {
+				navigatorKey.currentState.push(MaterialPageRoute(builder: (BuildContext context) {
 					return PhaseOne();
 				}));
 				break;

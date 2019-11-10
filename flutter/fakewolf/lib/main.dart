@@ -73,7 +73,7 @@ class _StartPageState extends State<StartPage> {
 							onPressed: () => _joinRoom(),
 						),
 						Expanded(child: Container()),
-						Text("Your name is: $playerName",
+						Text("Your name is:" + player.name,
 							style: new TextStyle(
 								fontSize: 17.0,
 								color: Colors.black,

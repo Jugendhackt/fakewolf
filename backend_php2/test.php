@@ -8,21 +8,30 @@ require __DIR__ . '/vendor/autoload.php';
 
 class Room{
     public $id;
+	public $phase//the phase the room is currently in_array
+	public $alarm//the time at which the curret phase is over
     private $players;
 
     public function __construct($id) {
         $this->id = $id;
         $this->players = array();
+		$this->phase = 0;
     }
 
     public function addPlayer($name){
         array_push($this->players, $name);
     }
-
+	
     public function getPlayers(){
         return json_encode($this->players);
     }
-
+	
+	public function startRoom(){
+		$this->phase = 1
+		$this.alarm = time()+90
+	}
+	
+	public function (){}
 }
 
 class Server implements MessageComponentInterface{
@@ -79,6 +88,7 @@ class Server implements MessageComponentInterface{
 
                     )
                 )));
+				
         }
 
     }

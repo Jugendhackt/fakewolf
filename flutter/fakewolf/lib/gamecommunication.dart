@@ -43,6 +43,7 @@ class GameCommunication {
 	/// Getter to return the player's name
 	///
 	String get playerName => _playerName;
+	set playerName (s) => _playerName = s;
 
 	/// ----------------------------------------------------------
 	/// Common handler for all received messages, from the server
@@ -88,14 +89,6 @@ class GameCommunication {
 	/// Common method to send requests to the server
 	/// ----------------------------------------------------------
 	send(String action, dynamic data) {
-		///
-		/// When a player joins, we need to record the name
-		/// he provides
-		///
-		if (action == 'joinRoom') {
-			_playerName = data;
-		}
-
 		///
 		/// Send the action to the server
 		/// To send the message, we need to serialize the JSON

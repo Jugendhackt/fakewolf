@@ -36,4 +36,4 @@ you write a headline for a news paper. You get a camp from journalist and write 
 is a vote were you chose who wrote a Fake News headline and how a normal. You can talk with your player. For this we make a chat. For the vote you see cards with the headlines and you choose the Fake News headlines. 
 You win when your group have a election results over 50%.
 
-## We hope that you have fun when you play it :) 
+## We hope that you will have fun when you play it :) 

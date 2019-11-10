@@ -16,7 +16,7 @@ class _CreatePageState extends State<CreatePage> {
 
   void _startGame() {
     if(players.length > 2) {
-      print("started");
+      game.send("startRoom", roomCode);
     } else {
       print("Not enough players!");
     }

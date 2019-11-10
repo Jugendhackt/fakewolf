@@ -2,6 +2,7 @@ import 'package:fakewolf/lobbyPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:fakewolf/GLOBALS.dart';
+import 'gamecommunication.dart';
 
 class JoinPage extends StatefulWidget {
   JoinPage({Key key, this.title}) : super(key: key);
@@ -24,6 +25,9 @@ class JoinPage extends StatefulWidget {
 class _JoinPageState extends State<JoinPage> {
   _joinLobby() {
     if (joinController.text.length == 6) {
+      roomCode = joinController.text;
+      game.send("joinRoom", roomCode);
+
       Navigator.of(context)
           .push(MaterialPageRoute<Null>(builder: (BuildContext context) {
         return new LobbyPage();

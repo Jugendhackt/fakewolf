@@ -53,10 +53,9 @@ class GameCommunication {
 		/// let's deserialize it to get the corresponding
 		/// JSON object
 		///
+		print("Received raw message:   " + serverMessage);
 		Map message = json.decode(serverMessage);
-
-		print("Received message in gameComm:   " + message.toString());
-
+		
 		switch (message["action"]) {
 		///
 		/// When the communication is established, the server

@@ -19,24 +19,23 @@ for running the game please ignore the folders backend and backend_python.
 		-run the files and be happy
 		
 ## Game: 
-	We created this Game to show how we see Fake News and how this articals can influenc us. 
-	The Code is a game wich you can play together in a group. This group can be a room in realty or you send the roomID to outher frends and than you can play together.
+We created this Game to show how we are being influenced by fake news. 
+The Code is a game wich you can play together in a group. This group can be a room in realty or you send the roomID to outher frends and than you can play together.
 	
 ### course of the game: 
 **On the first site**
 
 
-you get card with real news. You read the card in a certain time. When the time is over you will send to the next page.
+You get a card with real news, we pulled from the net using NewsAPI. You are given a certain time to read the card. When the time is over you will be sent to the next page.
 
 **On the second page**
 
 
-you write a headline for a news paper. You get a camp from journalist and write then the headline. The camps you can get are populist or a normal journalist. When you are populist you write a headline with a hight Fake News input. The game shows you a card with words, a few words must stand in your hadline. When you use more, the pointscore run higher. We also send little inforamtion cards with some more Infos to give you some help in the vote part. 
+You write a headline for a news paper. You are assigned one of two teams, either the journalists or the populists. If you are a populist you write a headline with that contains fake news. The game shows you a selection of keywords, a few words must be written in your hadline. If you are using more than needed, you will gain more points. The game is sending random informations during the game that might be helpfil the detect fake news. 
 
 **On the last page**
 
 
-is a vote were you chose who wrote a Fake News headline and how a normal. You can talk with your player. For this we make a chat. For the vote you see cards with the headlines and you choose the Fake News headlines. 
-You win when your group have a election results over 50%.
+In the last game pahse you will have to decide on a certain article which you think might be fake news, if you are a populist you of course want to choose the real news.The player with the most votes on his article gets kicked from the game. You can talk with the other players. For this we made an ingame chat. 
 
 ## We hope that you will have fun when you play it :) 

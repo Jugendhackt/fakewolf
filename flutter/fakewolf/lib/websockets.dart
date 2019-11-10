@@ -9,7 +9,7 @@ WebSocketsNotifications sockets = new WebSocketsNotifications();
 ///
 /// Put your WebSockets server IP address and port number
 ///
-const String _SERVER_ADDRESS = "wss://demos.kaazing.com/echo";//"ws://192.168.1.45:34263"; //TODO: Add real IP and port
+const String _SERVER_ADDRESS = "ws://78.47.150.51:6789";//"ws://192.168.1.45:34263"; //TODO: Add real IP and port
 
 class WebSocketsNotifications {
 	static final WebSocketsNotifications _sockets = new WebSocketsNotifications._internal();

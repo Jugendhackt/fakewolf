@@ -3,7 +3,7 @@ fakewolf is a game similar to the "Werwolf" game
 for running the game please ignore the folders backend and backend_python
 
 Installation:
-	backend
+	backend:
 		-replace the ip fields in the last lines of code and put in your adress and port
 		-run the test.php file on a server and keep the file running in the background
 

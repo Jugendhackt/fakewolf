@@ -15,7 +15,7 @@ Installation:
 		-paste that api key in the cofig file
 		-run the files and be happy
 		
-Game: 
+## Game: 
 	We created this Game to show how we see Fake News and how this articals can influenc us. 
 	The Code is a game wich you can play together in a group. This group can be a room in realty or you send the roomID to outher frends and than you can play together.
 	
@@ -25,4 +25,4 @@ On the second page you write a headline for a news paper. You get a camp from jo
 The last part is a vote were you chose who wrote a Fake News headline and how a normal. You can talk with your player. For this we make a chat. For the vote you see cards with the headlines and you choose the Fake News headlines. 
 You win when your group have a election results over 50%.
 
-We hope that you have fun when you play it. 
+## We hope that you have fun when you play it. 

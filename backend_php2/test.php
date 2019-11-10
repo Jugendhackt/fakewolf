@@ -61,7 +61,7 @@ class Server implements MessageComponentInterface{
     }
 
     public function onMessage(ConnectionInterface $from, $msg) {
-	    $from.send("Message Recieved");
+	    $from->send("Message Recieved");
         $data = json_decode($msg);
         switch ($data->action){
             case 'createRoom':

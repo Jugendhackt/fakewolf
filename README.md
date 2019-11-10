@@ -30,7 +30,7 @@ you get card with real news. You read the card in a certain time. When the time 
 
 you write a headline for a news paper. You get a camp from journalist and write then the headline. The camps you can get are populist or a normal journalist. When you are populist you write a headline with a hight Fake News input. The game shows you a card with words, a few words must stand in your hadline. When you use more, the pointscore run higher. We also send little inforamtion cards with some more Infos to give you some help in the vote part. 
 
-**on the last page**
+**On the last page**
 
 
 is a vote were you chose who wrote a Fake News headline and how a normal. You can talk with your player. For this we make a chat. For the vote you see cards with the headlines and you choose the Fake News headlines. 

@@ -80,7 +80,7 @@ class _CreatePageState extends State<CreatePage> {
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.blueAccent)
               ),
-              child: SelectableText(
+              child: Text(
                 roomCode,
                 style: new TextStyle(
                     fontSize: 27.0,

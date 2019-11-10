@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -54,20 +57,32 @@ class PhaseOne extends StatefulWidget {
 	State<StatefulWidget> createState() => PhaseOneState();
 }
 
-class PhaseOneState extends State<PhaseOne> {
+class PhaseOneState extends State<PhaseOne> with TickerProviderStateMixin {
 
-	int selected = -1;
+	static int selected = -1;
+	static int timeLeft = 0;
+
+	Timer timer;
+	AnimationController timerAnim;
 
 	@override
 	void initState() {
+		print("Called initState");
 		super.initState();
+
+		Timer.periodic(Duration(seconds: 1), (timer) {
+			this.setState(() {
+				timeLeft--;
+			});
+		});
+		timerAnim = AnimationController(vsync: this, duration: Duration(seconds: 10));
 
 		///
 		/// Ask to be notified when messages related to the game
 		/// are sent by the server
 		///
 		game.addListener(_onGameDataReceived);
-		game.send("test", "test");
+		game.send("cards", "{\"Test1\":[\"abc\",\"abc2\"]}");
 	}
 
 	@override
@@ -79,11 +94,21 @@ class PhaseOneState extends State<PhaseOne> {
 	_onGameDataReceived(message) {
 		switch (message["action"]) {
 			case "cards":
-				Map<String, List<String>> cards = message["data"];
+				Map cards = json.decode(message["data"]);
 				widget.player.cards = List<NewsCard>.generate(cards.length, (i) {
-					return NewsCard(cards.keys.toList()[i], cards[cards.keys.toList()[i]]);
+					String description = cards.keys.toList()[i];
+					List keyWords = cards[description].cast<String>();
+					return NewsCard(description, keyWords);
 				});
+				setState(() {});
 				print(widget.player.cards);
+				break;
+			case "phaseUpdate":
+				int phase = message["data"];
+				switch (phase) {
+					case 1:
+						timeLeft = 10;
+				}
 				break;
 			default:
 				print(message);
@@ -114,7 +139,8 @@ class PhaseOneState extends State<PhaseOne> {
 	Widget build(BuildContext context) {
 		return Scaffold(
 			appBar: appBar,
-			body: Padding(
+			floatingActionButton: Text("Test"),
+			body: Container(
 				padding: EdgeInsets.all(30.0),
 				child: ListView.builder(
 					itemCount: widget.player.cards.length,

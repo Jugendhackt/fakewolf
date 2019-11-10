@@ -9,4 +9,4 @@ MaterialColor color = Colors.blue;
 TextEditingController joinController = new TextEditingController();
 TextStyle font = TextStyle(fontSize: 16.0);
 final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
-List<String> players;
+List<String> players = [player.name];

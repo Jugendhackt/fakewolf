@@ -5,43 +5,11 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'GLOBALS.dart';
 import 'gamecommunication.dart';
 
-class Player {
-	String name;
-	List<NewsCard> cards;
-
-	Player(this.name) {
-		cards = <NewsCard>[testCard(), testCard()];
-	}
-
-	static NewsCard testCard() {
-		return NewsCard(
-			"This is a test Text. This is only used to make this application work and see if it supports automatic multiline text.",
-			<String>["Test", "is", "work"],
-		);
-	}
-}
-
-
-final font = TextStyle(fontSize: 16.0);
-
-
-class NewsCard {
-	String description;
-	List<String> keywords;
-
-	NewsCard(this.description, this.keywords);
-
-	static Map makeCardMap(List<NewsCard> cards){
-		Map<String, List<String>> m = Map.fromIterable(cards, key: (c) => c.description, value: (c) => c.keywords);
-		return m;
-	}
-}
 
 class PhaseOne extends StatefulWidget {
-
-	final player = Player("Test");
 
 	@override
 	State<StatefulWidget> createState() => PhaseOneState();
@@ -88,13 +56,13 @@ class PhaseOneState extends State<PhaseOne> with TickerProviderStateMixin {
 		switch (message["action"]) {
 			case "cards":
 				Map cards = json.decode(message["data"]);
-				widget.player.cards = List<NewsCard>.generate(cards.length, (i) {
+				player.cards = List<NewsCard>.generate(cards.length, (i) {
 					String description = cards.keys.toList()[i];
 					List keyWords = cards[description].cast<String>();
 					return NewsCard(description, keyWords);
 				});
 				setState(() {});
-				print(widget.player.cards);
+				print(player.cards);
 				break;
 			case "phaseUpdate":
 				int phase = message["data"];
@@ -136,7 +104,7 @@ class PhaseOneState extends State<PhaseOne> with TickerProviderStateMixin {
 			body: Container(
 				padding: EdgeInsets.all(30.0),
 				child: ListView.builder(
-					itemCount: widget.player.cards.length,
+					itemCount: player.cards.length,
 					itemBuilder: (BuildContext context, int i) {
 						return Container(
 							padding: EdgeInsets.only(bottom: 15.0),
@@ -157,7 +125,7 @@ class PhaseOneState extends State<PhaseOne> with TickerProviderStateMixin {
 										radius: 300,
 										child: Container(
 											padding: EdgeInsets.all(15),
-											child: Text(widget.player.cards[i].description, style: font),
+											child: Text(player.cards[i].description, style: font),
 										),
 
 									)

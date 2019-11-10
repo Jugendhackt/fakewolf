@@ -1,6 +1,10 @@
 import 'dart:convert';
 
+import 'package:fakewolf/GLOBALS.dart';
+import 'package:fakewolf/phases.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'websockets.dart';
 import 'package:fakewolf/GLOBALS.dart';
 
@@ -8,6 +12,34 @@ import 'package:fakewolf/GLOBALS.dart';
 /// Again, application-level global variable
 ///
 GameCommunication game = new GameCommunication();
+
+class Player {
+	String name;
+	List<NewsCard> cards;
+
+	Player(this.name) {
+		cards = <NewsCard>[testCard(), testCard()];
+	}
+
+	static NewsCard testCard() {
+		return NewsCard(
+			"This is a test Text. This is only used to make this application work and see if it supports automatic multiline text.",
+			<String>["Test", "is", "work"],
+		);
+	}
+}
+
+class NewsCard {
+	String description;
+	List<String> keywords;
+
+	NewsCard(this.description, this.keywords);
+
+	static Map makeCardMap(List<NewsCard> cards){
+		Map<String, List<String>> m = Map.fromIterable(cards, key: (c) => c.description, value: (c) => c.keywords);
+		return m;
+	}
+}
 
 class GameCommunication {
 	static final GameCommunication _game = new GameCommunication._internal();
@@ -20,8 +52,6 @@ class GameCommunication {
 	///
 	/// Before the "join" action, the player has no unique ID
 	///
-
-	List<String> players = <String>[];
 
 	factory GameCommunication(){
 		return _game;
@@ -67,10 +97,10 @@ class GameCommunication {
 				roomCode = message["data"];
 				break;
 
-			case 'updateRoom':
-				pcounter++;
-				List data = json.decode(message["data"]);
-				data.forEach((val) => players.add(val));
+			case 'phaseUpdate':
+				navigatorKey.currentState.push(MaterialPageRoute(builder: (BuildContext context) {
+					return PhaseOne();
+				}));
 				break;
 
 		///

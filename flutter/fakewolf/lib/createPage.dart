@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'GLOBALS.dart';
+import 'gamecommunication.dart';
 
 class CreatePage extends StatefulWidget {
   CreatePage({Key key, this.title}) : super(key: key);
@@ -14,7 +15,7 @@ class CreatePage extends StatefulWidget {
 class _CreatePageState extends State<CreatePage> {
 
   void _startGame() {
-    if(pcounter > 2) {
+    if(players.length > 2) {
       print("started");
     } else {
       print("Not enough players!");
@@ -87,7 +88,7 @@ class _CreatePageState extends State<CreatePage> {
                   Expanded(child: Container()),
                   Icon(Icons.people),
                   Text(" Players: "),
-                  Text(pcounter.toString()),
+                  Text(players.length.toString()),
                   Expanded(child: Container())
                 ]
             ),
@@ -104,5 +105,17 @@ class _CreatePageState extends State<CreatePage> {
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    game.addListener((message) {
+      if(message["action"] == 'updateRoom')
+        setState(() {
+          players = message["data"];
+        });
+    });
   }
 }

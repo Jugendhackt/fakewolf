@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:fakewolf/GLOBALS.dart';
 
+import 'gamecommunication.dart';
+
 
 class LobbyPage extends StatefulWidget {
   LobbyPage({Key key, this.title}) : super(key: key);
@@ -90,7 +92,7 @@ class _LobbyPageState extends State<LobbyPage> {
                   Expanded(child: Container()),
                   Icon(Icons.people),
                   Text(" Players: "),
-                  Text(pcounter.toString()),
+                  Text(players.length.toString()),
                   Expanded(child: Container())
                 ]
             ),
@@ -101,5 +103,17 @@ class _LobbyPageState extends State<LobbyPage> {
 
       // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    
+    game.addListener((message) {
+      if(message["action"] == 'updateRoom')
+        setState(() {
+          players = message["data"];
+        });
+    });
   }
 }

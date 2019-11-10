@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:fakewolf/GLOBALS.dart';
 
-
 class JoinPage extends StatefulWidget {
   JoinPage({Key key, this.title}) : super(key: key);
 
@@ -23,10 +22,10 @@ class JoinPage extends StatefulWidget {
 }
 
 class _JoinPageState extends State<JoinPage> {
-
   _joinLobby() {
-    if(joinController.text.length == 6) {
-      Navigator.of(context).push(MaterialPageRoute<Null>(builder: (BuildContext context) {
+    if (joinController.text.length == 6) {
+      Navigator.of(context)
+          .push(MaterialPageRoute<Null>(builder: (BuildContext context) {
         return new LobbyPage();
       }));
     }
@@ -41,14 +40,12 @@ class _JoinPageState extends State<JoinPage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text("Join Room"),
       ),
       body: Center(
-
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
         child: Column(
@@ -68,24 +65,26 @@ class _JoinPageState extends State<JoinPage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Expanded(child: Container(),),
+            Expanded(
+              child: Container(),
+            ),
             Text(
               "Please enter a Room-Code:",
               style: new TextStyle(
                   fontSize: 23.0,
                   color: Colors.black,
-                  fontStyle: FontStyle.normal
-              ),
+                  fontStyle: FontStyle.normal),
             ),
             Row(
               children: <Widget>[
                 Expanded(child: Container()),
                 new Flexible(
-                   child: TextField(
-                     controller: joinController,
-                     textAlign: TextAlign.center,
-                     decoration: new InputDecoration.collapsed(hintText: "RoomID"),
-                   ),
+                  child: TextField(
+                    controller: joinController,
+                    textAlign: TextAlign.center,
+                    decoration:
+                        new InputDecoration.collapsed(hintText: "RoomID"),
+                  ),
                 ),
                 Expanded(child: Container()),
               ],

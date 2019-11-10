@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:web_socket_channel/io.dart';
+import 'package:web_socket_channel/html.dart';
 
 ///
 /// Application-level global variable to access the WebSockets
@@ -9,7 +9,7 @@ WebSocketsNotifications sockets = new WebSocketsNotifications();
 ///
 /// Put your WebSockets server IP address and port number
 ///
-const String _SERVER_ADDRESS = "ws://echo.websocket.org";//"ws://192.168.1.45:34263"; //TODO: Add real IP and port
+const String _SERVER_ADDRESS = "wss://demos.kaazing.com/echo";//"ws://192.168.1.45:34263"; //TODO: Add real IP and port
 
 class WebSocketsNotifications {
 	static final WebSocketsNotifications _sockets = new WebSocketsNotifications._internal();
@@ -23,7 +23,7 @@ class WebSocketsNotifications {
 	///
 	/// The WebSocket "open" channel
 	///
-	IOWebSocketChannel _channel;
+	HtmlWebSocketChannel _channel;
 
 	///
 	/// Is the connection established?
@@ -50,12 +50,14 @@ class WebSocketsNotifications {
 		/// Open a new WebSocket communication
 		///
 		try {
-			_channel = new IOWebSocketChannel.connect(_SERVER_ADDRESS);
+			_channel = HtmlWebSocketChannel.connect(_SERVER_ADDRESS);
 
 			///
 			/// Start listening to new notifications / messages
 			///
 			_channel.stream.listen(_onReceptionOfMessageFromServer);
+			_isOn = true;
+			print("Successfully initialized channel");
 		} catch(e){
 			///
 			/// General error handling
@@ -76,6 +78,7 @@ class WebSocketsNotifications {
 				_isOn = false;
 			}
 		}
+		print("Reset channel");
 	}
 
 	/// ---------------------------------------------------------
@@ -85,6 +88,7 @@ class WebSocketsNotifications {
 		if (_channel != null){
 			if (_channel.sink != null && _isOn){
 				_channel.sink.add(message);
+				print("Sent message:   " + message);
 			}
 		}
 	}
@@ -105,7 +109,6 @@ class WebSocketsNotifications {
 	/// a message from the server
 	/// ----------------------------------------------------------
 	_onReceptionOfMessageFromServer(message){
-		_isOn = true;
 		_listeners.forEach((Function callback){
 			callback(message);
 		});

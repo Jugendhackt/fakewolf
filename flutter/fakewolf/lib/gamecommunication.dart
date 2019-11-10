@@ -55,6 +55,8 @@ class GameCommunication {
 		///
 		Map message = json.decode(serverMessage);
 
+		print("Received message in gameComm:   " + message.toString());
+
 		switch (message["action"]) {
 		///
 		/// When the communication is established, the server
@@ -85,7 +87,7 @@ class GameCommunication {
 	/// ----------------------------------------------------------
 	/// Common method to send requests to the server
 	/// ----------------------------------------------------------
-	send(String action, String data) {
+	send(String action, dynamic data) {
 		///
 		/// When a player joins, we need to record the name
 		/// he provides

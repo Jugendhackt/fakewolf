@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:fakewolf/GLOBALS.dart';
 
 
 class JoinPage extends StatefulWidget {
@@ -66,7 +67,19 @@ class _JoinPageState extends State<JoinPage> {
                   fontStyle: FontStyle.normal
               ),
             ),
-            
+            Row(
+              children: <Widget>[
+                Expanded(child: Container()),
+                new Flexible(
+                   child: TextField(
+                     controller: joinController,
+                     textAlign: TextAlign.center,
+                     decoration: new InputDecoration.collapsed(hintText: "RoomID"),
+                   ),
+                ),
+                Expanded(child: Container()),
+              ],
+            ),
           ],
         ),
       ),

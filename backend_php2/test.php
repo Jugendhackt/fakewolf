@@ -136,6 +136,7 @@ class Server implements MessageComponentInterface{
 }
 
 // Run the server application through the WebSocket protocol on port 8080
-$app = new Ratchet\App('78.47.150.51', 6789, '78.47.150.51');
+$host = "78.47.150.51";
+$app = new Ratchet\App($host, 6789, $host);
 $app->route('/', new Server, array('*'));
 $app->run();

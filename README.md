@@ -1,6 +1,6 @@
 # Fake Wolf 
 
-![](https://raw.githubusercontent.com/Jugendhackt/fakewolf/master/logo%20und%20pr/logo.png=200x200)
+![](https://raw.githubusercontent.com/Jugendhackt/fakewolf/master/logo%20und%20pr/logo.png=400x400)
 
 Fake Wolf is a game similar to the "Werwolf" game 
 for running the game please ignore the folders backend and backend_python.

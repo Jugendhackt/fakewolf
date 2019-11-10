@@ -87,7 +87,7 @@ class GameCommunication {
 	/// ----------------------------------------------------------
 	/// Common method to send requests to the server
 	/// ----------------------------------------------------------
-	send(String action, String data) {
+	send(String action, dynamic data) {
 		///
 		/// When a player joins, we need to record the name
 		/// he provides

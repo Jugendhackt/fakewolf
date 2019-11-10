@@ -30,7 +30,7 @@ class Player {
 		cards = <NewsCard>[testCard(), testCard()];
 	}
 
-	NewsCard testCard() {
+	static NewsCard testCard() {
 		return NewsCard(
 			"This is a test Text. This is only used to make this application work and see if it supports automatic multiline text.",
 			<String>["Test", "is", "work"],
@@ -47,6 +47,11 @@ class NewsCard {
 	List<String> keywords;
 
 	NewsCard(this.description, this.keywords);
+
+	static Map makeCardMap(List<NewsCard> cards){
+		Map<String, List<String>> m = Map.fromIterable(cards, key: (c) => c.description, value: (c) => c.keywords);
+		return m;
+	}
 }
 
 class PhaseOne extends StatefulWidget {
@@ -68,6 +73,7 @@ class PhaseOneState extends State<PhaseOne> with TickerProviderStateMixin {
 	@override
 	void initState() {
 		print("Called initState");
+		print(json.encode({"Test":"Test"}));
 		super.initState();
 
 		Timer.periodic(Duration(seconds: 1), (timer) {
@@ -75,7 +81,7 @@ class PhaseOneState extends State<PhaseOne> with TickerProviderStateMixin {
 				timeLeft--;
 			});
 		});
-		timerAnim = AnimationController(vsync: this, duration: Duration(seconds: 10));
+		//timerAnim = AnimationController(vsync: this, duration: Duration(seconds: 10));
 
 		///
 		/// Ask to be notified when messages related to the game
@@ -83,6 +89,7 @@ class PhaseOneState extends State<PhaseOne> with TickerProviderStateMixin {
 		///
 		game.addListener(_onGameDataReceived);
 		game.send("cards", "{\"Test1\":[\"abc\",\"abc2\"]}");
+		game.send("cards", NewsCard.makeCardMap(<NewsCard>[Player.testCard(), Player.testCard(), Player.testCard()]));
 	}
 
 	@override

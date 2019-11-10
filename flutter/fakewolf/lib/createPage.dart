@@ -2,18 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'GLOBALS.dart';
 
-
 class CreatePage extends StatefulWidget {
   CreatePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
 
@@ -22,15 +12,20 @@ class CreatePage extends StatefulWidget {
 }
 
 class _CreatePageState extends State<CreatePage> {
-  CreatePage() {
-    print("TTEEEEEEEEEEEEEEEEEST");
-  }
-  int value = 0;
+  int pcounter = 1;
 
-  _addItem() {
+  void _onPlayerJoin(String name) {
     setState(() {
-      value = value + 1;
+      pcounter++;
     });
+  }
+
+  void _startGame() {
+    if(pcounter > 2) {
+      print("started");
+    } else {
+      print("Not enough players!");
+    }
   }
 
   @override
@@ -47,6 +42,7 @@ class _CreatePageState extends State<CreatePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text("Create Room"),
+
       ),
       body: Center(
 
@@ -69,40 +65,51 @@ class _CreatePageState extends State<CreatePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-               Text(
-                 "Your Room-Code is:",
-                 style: new TextStyle(
-                   fontSize: 23.0,
-                   color: Colors.black,
-                   fontStyle: FontStyle.normal
-                 ),
-               ),
-              Container(
-                margin: const EdgeInsets.all(15.0),
-                padding: const EdgeInsets.all(3.0),
-                decoration: BoxDecoration(
+            Expanded(child: Container()),
+            Text(
+              "Your Room-Code is:",
+              style: new TextStyle(
+                  fontSize: 23.0,
+                  color: Colors.black,
+                  fontStyle: FontStyle.normal
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(3.0),
+              decoration: BoxDecoration(
                   border: Border.all(color: Colors.blueAccent)
               ),
               child: SelectableText(
-                  roomCode,
-                  style: new TextStyle(
+                roomCode,
+                style: new TextStyle(
                     fontSize: 27.0,
                     color: Colors.black,
                     fontStyle: FontStyle.normal
                 ),
               ),
             ),
-            Icon(Icons.people),
-            ListView.builder(
-              itemCount: this.value,
-              itemBuilder: (context, index) => this._buildRow(index)),
+            Row(
+                children: <Widget>[
+                  Expanded(child: Container()),
+                  Icon(Icons.people),
+                  Text(" Players: "),
+                  Text(pcounter.toString()),
+                  Expanded(child: Container())
+                ]
+            ),
+            Expanded(child: Container(),),
+            RaisedButton(
+              child: Text("Start Game!", style: TextStyle(color: Colors.white)),
+              color: Colors.blue,
+              onPressed: () => _startGame(),
+            ),
+            
+
           ],
         ),
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
-  }
-  _buildRow(int index) {
-    return Text("Item " + index.toString());
   }
 }

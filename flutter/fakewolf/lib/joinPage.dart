@@ -66,6 +66,7 @@ class _JoinPageState extends State<JoinPage> {
                   fontStyle: FontStyle.normal
               ),
             ),
+            
           ],
         ),
       ),

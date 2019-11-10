@@ -61,6 +61,7 @@ class Server implements MessageComponentInterface{
     }
 
     public function onMessage(ConnectionInterface $from, $msg) {
+	    $from.send("Message Recieved");
         $data = json_decode($msg);
         switch ($data->action){
             case 'createRoom':
@@ -136,7 +137,7 @@ class Server implements MessageComponentInterface{
 }
 
 // Run the server application through the WebSocket protocol on port 8080
-$host = "78.47.150.51";
+$host = "127.0.0.1";
 $app = new Ratchet\App($host, 6789, $host);
 $app->route('/', new Server, array('*'));
 $app->run();

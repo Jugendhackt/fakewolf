@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'websockets.dart';
+import 'package:fakewolf/GLOBALS.dart';
 
 ///
 /// Again, application-level global variable
@@ -19,7 +20,6 @@ class GameCommunication {
 	///
 	/// Before the "join" action, the player has no unique ID
 	///
-	String _roomID = "";
 
 	List<String> players = <String>[];
 
@@ -64,10 +64,11 @@ class GameCommunication {
 		/// Let's record it
 		///
 			case 'room':
-				_roomID = message["data"];
+				roomCode = message["data"];
 				break;
 
 			case 'updateRoom':
+				pcounter++;
 				List data = json.decode(message["data"]);
 				data.forEach((val) => players.add(val));
 				break;

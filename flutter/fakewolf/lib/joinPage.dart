@@ -1,3 +1,4 @@
+import 'package:fakewolf/lobbyPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:fakewolf/GLOBALS.dart';
@@ -22,6 +23,14 @@ class JoinPage extends StatefulWidget {
 }
 
 class _JoinPageState extends State<JoinPage> {
+
+  _joinLobby() {
+    if(joinController.text.length == 6) {
+      Navigator.of(context).push(MaterialPageRoute<Null>(builder: (BuildContext context) {
+        return new LobbyPage();
+      }));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +68,7 @@ class _JoinPageState extends State<JoinPage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Expanded(child: Container(),),
             Text(
               "Please enter a Room-Code:",
               style: new TextStyle(
@@ -79,6 +89,12 @@ class _JoinPageState extends State<JoinPage> {
                 ),
                 Expanded(child: Container()),
               ],
+            ),
+            Expanded(child: Container()),
+            RaisedButton(
+              child: Text("Join Game!", style: TextStyle(color: Colors.white)),
+              color: Colors.blue,
+              onPressed: () => _joinLobby(),
             ),
           ],
         ),

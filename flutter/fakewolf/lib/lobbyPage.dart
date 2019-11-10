@@ -1,25 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'GLOBALS.dart';
+import 'package:fakewolf/GLOBALS.dart';
 
-class CreatePage extends StatefulWidget {
-  CreatePage({Key key, this.title}) : super(key: key);
+
+class LobbyPage extends StatefulWidget {
+  LobbyPage({Key key, this.title}) : super(key: key);
+
+  // This widget is the home page of your application. It is stateful, meaning
+  // that it has a State object (defined below) that contains fields that affect
+  // how it looks.
+
+  // This class is the configuration for the state. It holds the values (in this
+  // case the title) provided by the parent (in this case the App widget) and
+  // used by the build method of the State. Fields in a Widget subclass are
+  // always marked "final".
 
   final String title;
 
   @override
-  _CreatePageState createState() => _CreatePageState();
+  _LobbyPageState createState() => _LobbyPageState();
 }
 
-class _CreatePageState extends State<CreatePage> {
+class _LobbyPageState extends State<LobbyPage> {
 
-  void _startGame() {
-    if(pcounter > 2) {
-      print("started");
-    } else {
-      print("Not enough players!");
-    }
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +38,7 @@ class _CreatePageState extends State<CreatePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text("Create Room"),
-
+        title: Text("Lobby"),
       ),
       body: Center(
 
@@ -60,7 +63,7 @@ class _CreatePageState extends State<CreatePage> {
           children: <Widget>[
             Expanded(child: Container()),
             Text(
-              "Your Room-Code is:",
+              "The Room-Code is:",
               style: new TextStyle(
                   fontSize: 23.0,
                   color: Colors.black,
@@ -74,7 +77,7 @@ class _CreatePageState extends State<CreatePage> {
                   border: Border.all(color: Colors.blueAccent)
               ),
               child: Text(
-                roomCode,
+                joinController.text,
                 style: new TextStyle(
                     fontSize: 27.0,
                     color: Colors.black,
@@ -92,16 +95,10 @@ class _CreatePageState extends State<CreatePage> {
                 ]
             ),
             Expanded(child: Container(),),
-            RaisedButton(
-              child: Text("Start Game!", style: TextStyle(color: Colors.white)),
-              color: Colors.blue,
-              onPressed: () => _startGame(),
-            ),
-            
-
           ],
         ),
       ),
+
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

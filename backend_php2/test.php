@@ -7,12 +7,12 @@ require __DIR__ . '/vendor/autoload.php';
 
 class Player{
 	public $id;
-	public $name
+	public $name;
 
 
 
 	public function __construct($name, $id){
-	
+
 	}
 
 
@@ -20,8 +20,8 @@ class Player{
 
 class Room{
     public $id;
-	public $phase//the phase the room is currently in_array
-	public $alarm//the time at which the curret phase is over
+	public $phase;//the phase the room is currently in_array
+	public $alarm;//the time at which the curret phase is over
     public $players; //array with player IDs (same ids as corresponding clients)
 
     public function __construct($id) {
@@ -37,17 +37,16 @@ class Room{
     public function getPlayers(){
         return json_encode($this->players);
     }
-	
-    public function startRoom(){
-	$this->phase = 1;
-	$this.alarm = time()+90;
-    }
-		
+
+	public function startRoom(){
+		$this->phase = 1;
+		$this->alarm = time()+90;
+	}
 }
 
 class Server implements MessageComponentInterface{
 	protected $clients;
-	private $clientNames; //Array with  the same index as clients, but an the players name  as value 
+	private $clientNames; //Array with  the same index as clients, but an the players name  as value
 	private $clientRooms; //Array with the same index as clients, but an roomID as value
     private $rooms;
 
@@ -57,27 +56,29 @@ class Server implements MessageComponentInterface{
     }
 
     public function onOpen(ConnectionInterface $conn) {
+        print("lel");
         $this->clients->attach($conn);
     }
 
     public function onMessage(ConnectionInterface $from, $msg) {
+	    $from.send("Message Recieved");
         $data = json_decode($msg);
         switch ($data->action){
             case 'createRoom':
                 $id = rand(111111, 999999);
                 $this->rooms[$id] = new Room($id);
-		$this->rooms[$id]->addPlayer($data->name);
-		
-		foreach($i=0;i<count($clients);i++){
-			if($clients[i]==$from){
-				$clientNames[i]=$data->name;
-				$clientRooms[i]=$id;
-			}		
-		}
-		
-		$output = json_encode(array(
-                    "type"=>"room",
-		    "roomID"=>$id
+                $this->rooms[$id]->addPlayer($data->name);
+
+                for($i=0;$i<count($this->clients);$i++){
+                    if($this->clients[$i]==$from){
+                        $clientNames[$i]=$data->name;
+                        $clientRooms[$i]=$id;
+                    }
+                }
+
+		        $output = json_encode(array(
+                    "action"=>"room",
+                    "data"=>$id
                 ));
                 $from->send($output);
                 break;
@@ -89,18 +90,17 @@ class Server implements MessageComponentInterface{
                 }
                 else{
                     $from->send("Room does not exist");
-		}
-		foreach($i=0;i<count($clients);i++){
-			if($clients[i]==$from){
-				$senderID = i;
-				$clientNames[i]=$data->name;
-				$clientRooms[i]=$data->roomID;
-			}		
-		}
-		foreach($rooms[senderID].players as $playerID)
-			$clients[$playerID].send("{type:roomUpdate,data{hello, hello}}")
-		
-			
+		        }
+                for($i=0;$i<count($this->clients);$i++){
+                    if($this->clients[$i]==$from){
+                        $senderID = $i;
+                        $clientNames[$i]=$data->name;
+                        $clientRooms[$i]=$data->roomID;
+                    }
+                }
+		        foreach($this->rooms[senderID].players as $playerID){
+                    $this->clients[$playerID].send("{type:roomUpdate,data{hello, hello}}");
+                }
                 break;
             case 'sendMessage':
                 foreach ($this->clients as $client) {
@@ -113,23 +113,18 @@ class Server implements MessageComponentInterface{
                 }
                 $from->send("success");
                 break;
-           // case 'getCards':
-           //     $from->send(json_encode());
-	   //	break;
-		
-	    case 'playCard':
-		foreach($i=0;i<count($clients);i++){
-			if($clients[$i]==$from){
-				$roomID = $clientRooms[$i];
-				$clientID = $i;
-			}		
-		}
-		$player = $this->rooms[$roomID]->players[$id];
-		$card = array("description" => "Blah", "keywords" => "some key words");
-		$player.cards[$data->index] = $card;
-		$from->send(json_encode($card));
-	}
-
+            case 'playCard':
+                for($i=0;$i<count($this->clients);$i++){
+                    if($this->clients[$i]==$from){
+                        $roomID = $this->clientRooms[$i];
+                        $clientID = $i;
+                    }
+                }
+                $player = $this->rooms[$roomID]->players[$clientID];
+                $card = array("description" => "Blah", "keywords" => "some key words");
+                $player->cards[$data->index] = $card;
+                $from->send(json_encode($card));
+	    }
     }
 
     public function onClose(ConnectionInterface $conn) {
@@ -142,6 +137,7 @@ class Server implements MessageComponentInterface{
 }
 
 // Run the server application through the WebSocket protocol on port 8080
-$app = new Ratchet\App('localhost', 8080);
+$host = "127.0.0.1";
+$app = new Ratchet\App($host, 6789, $host);
 $app->route('/', new Server, array('*'));
 $app->run();
